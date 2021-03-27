@@ -54,6 +54,18 @@ Mismatching Entity name and reference in @NamedQuery
             org.hibernate.hql.internal.ast.QuerySyntaxException: Request is not mapped [select r from Request r where r.partnerCode = :partnerCode order by r.dateCreated desc ]
 ```
 
+## Issue 7: NullPointerException in com.econetwireless.epay.api.rest.resources.EpayResource
+
+TESTS failing because controller is throwing null pointer exception because controller parameter is declared as final and has no @PathVariable annotation
+
+```java
+    public AirtimeBalanceResponse enquireAirtimeBalance( final String pCode, @PathVariable("mobileNumber") final String msisdn) {}
+```
+
+```
+  shouldReturnStatusOkIfRequestsAreMoreThanOne(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): Request processing failed; nested exception is java.lang.NullPointerException
+```
+
 
 
 
