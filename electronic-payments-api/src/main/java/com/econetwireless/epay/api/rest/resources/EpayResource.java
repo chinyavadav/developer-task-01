@@ -22,15 +22,9 @@ public class EpayResource {
 
     private ReportingProcessor reportingProcessor;
 
-
-    public EpayResource(EpayRequestProcessor epayRequestProcessor, ReportingProcessor reportingProcessor) {
-        this.epayRequestProcessor = epayRequestProcessor;
-        this.reportingProcessor = reportingProcessor;
-    }
-
     @GetMapping(value = "enquiries/{partnerCode}/balances/{mobileNumber}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public AirtimeBalanceResponse enquireAirtimeBalance(final String pCode, @PathVariable("mobileNumber") final String msisdn) {
+    public AirtimeBalanceResponse enquireAirtimeBalance(@PathVariable("partnerCode")  final String pCode, @PathVariable("mobileNumber") final String msisdn) {
         return epayRequestProcessor.enquireAirtimeBalance(pCode, msisdn);
     }
 

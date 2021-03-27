@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by tnyamakura on 17/3/2017.
  */
 @Transactional
-public class CreditsServiceImpl implements CreditsService {
+public class CreditsServiceImpl implements CreditsService{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CreditsServiceImpl.class);
 
@@ -36,16 +36,8 @@ public class CreditsServiceImpl implements CreditsService {
         final AirtimeTopupResponse airtimeTopupResponse = new AirtimeTopupResponse();
         final SubscriberRequest subscriberRequest = populateSubscriberRequest(airtimeTopupRequest);
         final SubscriberRequest createdSubscriberRequest = subscriberRequestDao.save(subscriberRequest);
-        System.out.println(createdSubscriberRequest);
         final INCreditResponse inCreditResponse = chargingPlatform.creditSubscriberAccount(populate(airtimeTopupRequest));
-        if (inCreditResponse != null) {
-            System.out.println("pano0");
-            System.out.println(inCreditResponse);
-        } else {
-            System.out.println("pano");
-        }
         changeSubscriberRequestStatusOnCredit(createdSubscriberRequest, inCreditResponse);
-        System.out.println(createdSubscriberRequest);
         subscriberRequestDao.save(createdSubscriberRequest);
         airtimeTopupResponse.setResponseCode(inCreditResponse.getResponseCode());
         airtimeTopupResponse.setNarrative(inCreditResponse.getNarrative());
@@ -57,7 +49,7 @@ public class CreditsServiceImpl implements CreditsService {
 
     private static void changeSubscriberRequestStatusOnCredit(final SubscriberRequest subscriberRequest, final INCreditResponse inCreditResponse) {
         final boolean isSuccessfulResponse = ResponseCode.SUCCESS.getCode().equalsIgnoreCase(inCreditResponse.getResponseCode());
-        if (!isSuccessfulResponse) {
+        if(!isSuccessfulResponse) {
             subscriberRequest.setStatus(SystemConstants.STATUS_FAILED);
         } else {
             subscriberRequest.setStatus(SystemConstants.STATUS_SUCCESSFUL);
@@ -65,7 +57,6 @@ public class CreditsServiceImpl implements CreditsService {
             subscriberRequest.setBalanceBefore(inCreditResponse.getBalance() - subscriberRequest.getAmount());
         }
     }
-
     private static SubscriberRequest populateSubscriberRequest(final AirtimeTopupRequest airtimeTopupRequest) {
         final SubscriberRequest subscriberRequest = new SubscriberRequest();
         subscriberRequest.setRequestType(SystemConstants.REQUEST_TYPE_AIRTIME_TOPUP);
@@ -75,7 +66,6 @@ public class CreditsServiceImpl implements CreditsService {
         subscriberRequest.setAmount(airtimeTopupRequest.getAmount());
         return subscriberRequest;
     }
-
     private static INCreditRequest populate(final AirtimeTopupRequest airtimeTopupRequest) {
         final INCreditRequest inCreditRequest = new INCreditRequest();
         inCreditRequest.setAmount(airtimeTopupRequest.getAmount());

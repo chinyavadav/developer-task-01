@@ -37,7 +37,7 @@ public class RequestInterceptor {
             LOGGER.info("IN Get Partner Transactions :: Partner Code : {}",
                     partnerCode);
             transactionsResponse = checkingMissingFields(partnerCode);
-            if(StringUtils.isNotEmpty(transactionsResponse.getResponseCode())) {
+            if (StringUtils.isNotEmpty(transactionsResponse.getResponseCode())) {
                 return transactionsResponse;
             }
             partnerCodeValidator.validatePartnerCode(partnerCode);
@@ -47,7 +47,7 @@ public class RequestInterceptor {
             LOGGER.error("Custom Error on get transactions by partner code : ", ee);
             transactionsResponse.setNarrative(ee.getMessage());
             transactionsResponse.setResponseCode(ee.getResponseCode().getCode());
-        }catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             LOGGER.error("Error on get transactions by partner code : ", throwable);
             transactionsResponse.setNarrative("Balance enquiry request failed, please try again later");
             transactionsResponse.setResponseCode(ResponseCode.FAILED.getCode());
@@ -56,7 +56,7 @@ public class RequestInterceptor {
         LOGGER.info("[{}] IN Get Partner Transactions Response :: Partner Code : {}, Response Code : {}, Narrative : {}",
                 ResponseMarker.getMarker(transactionsResponse.getResponseCode()), partnerCode,
                 transactionsResponse.getResponseCode(), transactionsResponse.getNarrative());
-        return  transactionsResponse;
+        return transactionsResponse;
     }
 
 
@@ -67,7 +67,7 @@ public class RequestInterceptor {
             LOGGER.info("IN Enquire Airtime Balance :: Partner Code : {}, Mobile Number : {}",
                     partnerCode, msisdn);
             airtimeBalanceResponse = checkingMissingFields(partnerCode, msisdn);
-            if(StringUtils.isNotEmpty(airtimeBalanceResponse.getResponseCode())) {
+            if (StringUtils.isNotEmpty(airtimeBalanceResponse.getResponseCode())) {
                 return airtimeBalanceResponse;
             }
             partnerCodeValidator.validatePartnerCode(partnerCode);
@@ -77,7 +77,7 @@ public class RequestInterceptor {
             LOGGER.error("Custom Error on airtime balance : ", ee);
             airtimeBalanceResponse.setNarrative(ee.getMessage());
             airtimeBalanceResponse.setResponseCode(ee.getResponseCode().getCode());
-        }catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             LOGGER.error("Error on balance enquiry : ", throwable);
             airtimeBalanceResponse.setNarrative("Balance enquiry request failed, please try again later");
             airtimeBalanceResponse.setResponseCode(ResponseCode.FAILED.getCode());
@@ -86,7 +86,7 @@ public class RequestInterceptor {
         LOGGER.info("[{}] IN Enquire Airtime Balance Response :: Partner Code : {}, Mobile Number : {}, Response Code : {}, Narrative : {}",
                 ResponseMarker.getMarker(airtimeBalanceResponse.getResponseCode()), partnerCode, msisdn,
                 airtimeBalanceResponse.getResponseCode(), airtimeBalanceResponse.getNarrative());
-        return  airtimeBalanceResponse;
+        return airtimeBalanceResponse;
     }
 
     @Around("execution(* com.econetwireless.epay.api.rest.resources.EpayResource.creditAirtime(..)) and args(airtimeTopupRequest)")
@@ -96,7 +96,7 @@ public class RequestInterceptor {
             LOGGER.info("IN ECredit Airtime :: Partner Code : {}, Mobile Number : {}",
                     airtimeTopupRequest.getPartnerCode(), airtimeTopupRequest.getPartnerCode());
             airtimeTopupResponse = checkingMissingFields(airtimeTopupRequest);
-            if(StringUtils.isNotEmpty(airtimeTopupResponse.getResponseCode())) {
+            if (StringUtils.isNotEmpty(airtimeTopupResponse.getResponseCode())) {
                 return airtimeTopupResponse;
             }
             partnerCodeValidator.validatePartnerCode(airtimeTopupRequest.getPartnerCode());
@@ -106,7 +106,7 @@ public class RequestInterceptor {
             LOGGER.error("Custom Error on airtime credit : ", ee);
             airtimeTopupResponse.setNarrative(ee.getMessage());
             airtimeTopupResponse.setResponseCode(ee.getResponseCode().getCode());
-        }catch (Throwable throwable) {
+        } catch (Throwable throwable) {
             LOGGER.error("Error on credit airtime : ", throwable);
             airtimeTopupResponse.setNarrative("Airtime Purchase request failed, please try again later");
             airtimeTopupResponse.setResponseCode(ResponseCode.FAILED.getCode());
@@ -114,7 +114,7 @@ public class RequestInterceptor {
         LOGGER.info("[{}] IN Airtime Credit Response :: Partner Code : {}, Mobile Number : {}, Response Code : {}, Narrative : {}",
                 ResponseMarker.getMarker(airtimeTopupResponse.getResponseCode()), airtimeTopupRequest.getPartnerCode(), airtimeTopupRequest.getPartnerCode(),
                 airtimeTopupResponse.getResponseCode(), airtimeTopupResponse.getNarrative());
-        return  airtimeTopupResponse;
+        return airtimeTopupResponse;
     }
 
 
@@ -126,24 +126,25 @@ public class RequestInterceptor {
         UtilityBuilder.buildErrorMessage(builder, airtimeTopupRequest.getAmount() <= 0, "Recharge amount is required");
         validatePartnerCode(builder, airtimeTopupRequest.getPartnerCode());
         validateMsisdn(builder, airtimeTopupRequest.getMsisdn());
-        if(builder.length() > 0) {
+        if (builder.length() > 0) {
             airtimeTopupResponse.setNarrative(builder.toString());
             airtimeTopupResponse.setResponseCode(ResponseCode.INVALID_REQUEST.getCode());
         }
-        return  airtimeTopupResponse;
+        return airtimeTopupResponse;
 
     }
+
     private static AirtimeBalanceResponse checkingMissingFields(final String partnerCode, final String msisdn) {
         final AirtimeBalanceResponse airtimeBalanceResponse = new AirtimeBalanceResponse();
         airtimeBalanceResponse.setMsisdn(msisdn);
         final StringBuilder builder = new StringBuilder();
         validatePartnerCode(builder, partnerCode);
         validateMsisdn(builder, msisdn);
-        if(builder.length() > 0) {
+        if (builder.length() > 0) {
             airtimeBalanceResponse.setNarrative(builder.toString());
             airtimeBalanceResponse.setResponseCode(ResponseCode.INVALID_REQUEST.getCode());
         }
-        return  airtimeBalanceResponse;
+        return airtimeBalanceResponse;
 
     }
 
@@ -152,11 +153,11 @@ public class RequestInterceptor {
         transactionsResponse.setPartnerCode(partnerCode);
         final StringBuilder builder = new StringBuilder();
         validatePartnerCode(builder, partnerCode);
-        if(builder.length() > 0) {
+        if (builder.length() > 0) {
             transactionsResponse.setNarrative(builder.toString());
             transactionsResponse.setResponseCode(ResponseCode.INVALID_REQUEST.getCode());
         }
-        return  transactionsResponse;
+        return transactionsResponse;
 
     }
 

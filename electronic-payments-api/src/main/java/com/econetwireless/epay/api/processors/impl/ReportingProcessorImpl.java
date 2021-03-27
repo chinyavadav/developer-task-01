@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by tnyamakura on 18/3/2017.
  */
-public class ReportingProcessorImpl implements ReportingProcessor{
+public class ReportingProcessorImpl implements ReportingProcessor {
 
     private ReportingService reportingService;
 
@@ -24,7 +24,6 @@ public class ReportingProcessorImpl implements ReportingProcessor{
         final TransactionsResponse transactionsResponse = new TransactionsResponse();
         final List<SubscriberRequest> subscriberRequests = reportingService.findSubscriberRequestsByPartnerCode(partnerCode);
         transactionsResponse.setResponseCode(ResponseCode.SUCCESS.getCode());
-        System.out.println(ResponseCode.SUCCESS.getCode());
         transactionsResponse.setNarrative("Successful search");
         transactionsResponse.setSubscriberRequests(subscriberRequests);
         transactionsResponse.setPartnerCode(partnerCode);

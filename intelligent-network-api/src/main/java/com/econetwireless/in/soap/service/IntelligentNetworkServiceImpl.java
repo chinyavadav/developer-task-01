@@ -45,16 +45,12 @@ public class IntelligentNetworkServiceImpl implements IntelligentNetworkService{
 
     @Override
     public CreditResponse creditSubscriberAccount(final CreditRequest creditRequest) {
-        System.out.println("panoA");
         final CreditResponse creditResponse = new CreditResponse();
-        System.out.println("panoX");
         if(creditRequest == null) {
-            System.out.println("panoY");
             creditResponse.setResponseCode(ResponseCode.FAILED.getCode());
             creditResponse.setNarrative("Invalid request, empty credit request");
             return creditResponse;
         }
-        System.out.println("panoZ");
         creditResponse.setMsisdn(creditRequest.getMsisdn());
         creditResponse.setBalance(creditRequest.getAmount() + getRandomBalance());
         creditResponse.setNarrative("Successful credit request");
