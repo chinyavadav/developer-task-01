@@ -13,7 +13,7 @@ java: non-static variable LOGGER cannot be referenced from a static context
 
 ### Issue 2: Log4j2 Misconfiguration
 
-Log4j2 in the intelligent-network-api has a misconfigured log path to save logs. The current path looks to save in the computer's root folder instead of classpath.
+Log4j2 in the intelligent-network-api & electronic-payments-api has a misconfigured log path to save logs. The current path looks to save in the computer's root folder instead of classpath.
 Also there is no root logger defined for Log4j2
 
 ```
