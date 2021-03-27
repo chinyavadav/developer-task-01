@@ -40,5 +40,10 @@ PreInsert annotation cannot be found in com.econetwireless.epay.domain.Subscribe
 this(super);
 ```
 
+## Issue 5: JPA persist & update methods not found
+
+SubscriberRequestDao extends JPA repository which in turn has no method persist or update defined
+
+
 
 
