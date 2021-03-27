@@ -44,6 +44,17 @@ this(super);
 
 SubscriberRequestDao extends JPA repository which in turn has no method persist or update defined
 
+## Issue 6: Error Executing JPARepository method findByPartnerCode
+
+Mismatching Entity name and reference in @NamedQuery 
+ 
+ ```
+ "select r from request r where r.partnerCode = :partnerCode order by r.dateCreated desc ")
+13:53:40.216 [main] ERROR org.hibernate.internal.SessionFactoryImpl - HHH000177: Error in named query: SubscriberRequest.findByPartnerCode
+            org.hibernate.hql.internal.ast.QuerySyntaxException: Request is not mapped [select r from Request r where r.partnerCode = :partnerCode order by r.dateCreated desc ]
+```
+
+
 
 
 
