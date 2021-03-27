@@ -81,6 +81,13 @@ public enum ResponseCode {
 }
 ```
 
+## Issue 9: Airtime Credit not working returns 500 instead of 200
+
+```
+ airtimeTopupShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): JSON path "$.responseCode" expected:<200> but was:<500>
+
+```
+
 
 
 

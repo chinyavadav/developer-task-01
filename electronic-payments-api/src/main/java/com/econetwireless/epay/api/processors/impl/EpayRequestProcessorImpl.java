@@ -11,7 +11,7 @@ import com.econetwireless.utils.messages.AirtimeTopupResponse;
 /**
  * Created by tnyamakura on 18/3/2017.
  */
-public class EpayRequestProcessorImpl implements EpayRequestProcessor{
+public class EpayRequestProcessorImpl implements EpayRequestProcessor {
 
     private EnquiriesService enquiriesService;
     private CreditsService creditsService;

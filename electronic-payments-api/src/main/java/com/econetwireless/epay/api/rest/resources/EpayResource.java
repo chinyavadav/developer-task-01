@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("resources/services")
 public class EpayResource {
-    private final Logger logger = LoggerFactory.getLogger(EpayResource.class);
 
     private EpayRequestProcessor epayRequestProcessor;
 
@@ -45,13 +44,6 @@ public class EpayResource {
     @GetMapping(value = "transactions/{partnerCode}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public TransactionsResponse getPartnerTransactions(@PathVariable("partnerCode") final String partnerCode) {
-        TransactionsResponse transactionsResponse = reportingProcessor.getPartnerTransactions(partnerCode);
-        if (transactionsResponse == null) {
-            logger.debug("pano!");
-        } else {
-            logger.debug(transactionsResponse.toString());
-        }
-        System.out.println(transactionsResponse.toString());
-        return transactionsResponse;
+        return reportingProcessor.getPartnerTransactions(partnerCode);
     }
 }
