@@ -45,4 +45,14 @@ public class TransactionsResponse {
     public void setSubscriberRequests(List<SubscriberRequest> subscriberRequests) {
         this.subscriberRequests = subscriberRequests;
     }
+
+    @Override
+    public String toString() {
+        return "TransactionsResponse{" +
+                "responseCode='" + responseCode + '\'' +
+                ", narrative='" + narrative + '\'' +
+                ", partnerCode='" + partnerCode + '\'' +
+                ", subscriberRequests=" + subscriberRequests +
+                '}';
+    }
 }

@@ -6,6 +6,8 @@ import com.econetwireless.epay.api.rest.messages.TransactionsResponse;
 import com.econetwireless.utils.messages.AirtimeBalanceResponse;
 import com.econetwireless.utils.messages.AirtimeTopupRequest;
 import com.econetwireless.utils.messages.AirtimeTopupResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -16,15 +18,21 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("resources/services")
 public class EpayResource {
+    private final Logger logger = LoggerFactory.getLogger(EpayResource.class);
 
     private EpayRequestProcessor epayRequestProcessor;
 
-
     private ReportingProcessor reportingProcessor;
+
+
+    public EpayResource(EpayRequestProcessor epayRequestProcessor, ReportingProcessor reportingProcessor) {
+        this.epayRequestProcessor = epayRequestProcessor;
+        this.reportingProcessor = reportingProcessor;
+    }
 
     @GetMapping(value = "enquiries/{partnerCode}/balances/{mobileNumber}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public AirtimeBalanceResponse enquireAirtimeBalance( final String pCode, @PathVariable("mobileNumber") final String msisdn) {
+    public AirtimeBalanceResponse enquireAirtimeBalance(final String pCode, @PathVariable("mobileNumber") final String msisdn) {
         return epayRequestProcessor.enquireAirtimeBalance(pCode, msisdn);
     }
 
@@ -38,6 +46,13 @@ public class EpayResource {
     @GetMapping(value = "transactions/{partnerCode}",
             produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public TransactionsResponse getPartnerTransactions(@PathVariable("partnerCode") final String partnerCode) {
-        return reportingProcessor.getPartnerTransactions(partnerCode);
+        TransactionsResponse transactionsResponse = reportingProcessor.getPartnerTransactions(partnerCode);
+        if (transactionsResponse == null) {
+            logger.debug("pano!");
+        } else {
+            logger.debug(transactionsResponse.toString());
+        }
+        System.out.println(transactionsResponse.toString());
+        return transactionsResponse;
     }
 }

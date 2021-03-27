@@ -3,19 +3,14 @@ package com.econetwireless.epay.api.processors.impl;
 import com.econetwireless.epay.api.processors.api.ReportingProcessor;
 import com.econetwireless.epay.api.rest.messages.TransactionsResponse;
 import com.econetwireless.epay.business.services.api.ReportingService;
-import com.econetwireless.epay.business.services.impl.ReportingServiceImpl;
 import com.econetwireless.epay.domain.SubscriberRequest;
 import com.econetwireless.utils.enums.ResponseCode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by tnyamakura on 18/3/2017.
  */
-@Transactional
 public class ReportingProcessorImpl implements ReportingProcessor{
 
     private ReportingService reportingService;
