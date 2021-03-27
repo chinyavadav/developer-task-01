@@ -66,6 +66,20 @@ TESTS failing because controller is throwing null pointer exception because cont
   shouldReturnStatusOkIfRequestsAreMoreThanOne(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): Request processing failed; nested exception is java.lang.NullPointerException
 ```
 
+## Issue 8: private ResponseCode enum constructor causing all statusCode to be null
+
+```
+public enum ResponseCode {
+    SUCCESS("200"), FAILED("500"), INVALID_REQUEST("400");
+    private String code;
+    private ResponseCode(String code) {
+        code = code;
+    }
+    public String getCode() {
+        return code;
+    }
+}
+```
 
 
 

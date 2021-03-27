@@ -24,10 +24,10 @@ public class ReportingProcessorImpl implements ReportingProcessor{
         final TransactionsResponse transactionsResponse = new TransactionsResponse();
         final List<SubscriberRequest> subscriberRequests = reportingService.findSubscriberRequestsByPartnerCode(partnerCode);
         transactionsResponse.setResponseCode(ResponseCode.SUCCESS.getCode());
+        System.out.println(ResponseCode.SUCCESS.getCode());
         transactionsResponse.setNarrative("Successful search");
         transactionsResponse.setSubscriberRequests(subscriberRequests);
         transactionsResponse.setPartnerCode(partnerCode);
         return transactionsResponse;
-
     }
 }
