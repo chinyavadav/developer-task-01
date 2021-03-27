@@ -22,3 +22,18 @@ Also there is no root logger defined for Log4j2
 2021-03-27 13:16:24,531 main WARN No Root logger was configured, creating default ERROR-level Root logger with Console appender
 ```
 
+### Issue 3: COMPILATION ERROR: Cannot find PreInsert
+
+PreInsert annotation cannot be found in com.econetwireless.epay.domain.SubscriberRequest
+
+```
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /Users/chinyavadav/Documents/zss/developer-task-01/electronic-payments-domain/src/main/java/com/econetwireless/epay/domain/SubscriberRequest.java:[42,6] cannot find symbol
+  symbol:   class PreInsert
+  location: class com.econetwireless.epay.domain.SubscriberRequest
+```
+
+
+
+
