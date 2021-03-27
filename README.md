@@ -34,6 +34,11 @@ PreInsert annotation cannot be found in com.econetwireless.epay.domain.Subscribe
   location: class com.econetwireless.epay.domain.SubscriberRequest
 ```
 
+## Issue 4: Compilation failure: Compilation failure: wrong use of super && this keywords
+
+```java
+this(super);
+```
 
 
 
