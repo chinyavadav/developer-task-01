@@ -22,13 +22,7 @@ public class ChargingPlatformImpl implements ChargingPlatform {
 
     @Override
     public INBalanceResponse enquireBalance(final String partnerCode, final String msisdn) {
-        System.out.println(intelligentNetworkService);
-        try {
-            return MessageConverters.convert(intelligentNetworkService.enquireBalance(partnerCode, msisdn));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
+        return MessageConverters.convert(intelligentNetworkService.enquireBalance(partnerCode, msisdn));
     }
 
     @Override

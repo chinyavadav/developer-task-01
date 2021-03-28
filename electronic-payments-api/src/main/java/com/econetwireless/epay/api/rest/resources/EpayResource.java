@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("resources/services")
 public class EpayResource {
-    private static final Logger logger = LoggerFactory.getLogger(EpayResource.class);
 
     private EpayRequestProcessor epayRequestProcessor;
 

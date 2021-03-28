@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Created by tnyamakura on 18/3/2017.
  */
-@Transactional
 public class ReportingServiceImpl implements ReportingService {
     Logger logger = LoggerFactory.getLogger(ReportingServiceImpl.class);
 

@@ -100,5 +100,12 @@ Could not access remote service at [http://localhost:8888/intelligent-network-ap
 
 ```
 
+## Issue 11: partnerCode not found
+
+Missing @WebParam(name = "partnerCode") annotation on partnerCode parameter in IntelligentNetworkService
+
+Failed tests:   airtimeBalanceEnquiryShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): JSON path "$.responseCode" expected:<200> but was:<400>
+
+
 
 

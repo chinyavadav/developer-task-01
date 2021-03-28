@@ -10,26 +10,24 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.jws.WebService;
-import javax.xml.ws.BindingType;
-import javax.xml.ws.soap.SOAPBinding;
 
 /**
  * Created by tnyamakura on 17/3/2017.
  */
 @WebService(endpointInterface = "com.econetwireless.in.soap.service.IntelligentNetworkService",
         serviceName = "IntelligentNetworkService", portName = "IntelligentNetworkPort", name = "IntelligentNetworkService")
-public class IntelligentNetworkServiceImpl implements IntelligentNetworkService{
+public class IntelligentNetworkServiceImpl implements IntelligentNetworkService {
     private static final Logger LOGGER = LoggerFactory.getLogger(IntelligentNetworkServiceImpl.class);
 
     @Override
     public BalanceResponse enquireBalance(final String partnerCode, final String msisdn) {
         final BalanceResponse balanceResponse = new BalanceResponse();
-        if(StringUtils.isEmpty(partnerCode)) {
+        if (StringUtils.isEmpty(partnerCode)) {
             balanceResponse.setResponseCode(ResponseCode.INVALID_REQUEST.getCode());
             balanceResponse.setNarrative("Invalid request, missing partner code");
             return balanceResponse;
         }
-        if(StringUtils.isEmpty(msisdn)) {
+        if (StringUtils.isEmpty(msisdn)) {
             balanceResponse.setResponseCode(ResponseCode.INVALID_REQUEST.getCode());
             balanceResponse.setNarrative("Invalid request, missing mobile number");
             return balanceResponse;
@@ -45,7 +43,7 @@ public class IntelligentNetworkServiceImpl implements IntelligentNetworkService{
     @Override
     public CreditResponse creditSubscriberAccount(final CreditRequest creditRequest) {
         final CreditResponse creditResponse = new CreditResponse();
-        if(creditRequest == null) {
+        if (creditRequest == null) {
             creditResponse.setResponseCode(ResponseCode.FAILED.getCode());
             creditResponse.setNarrative("Invalid request, empty credit request");
             return creditResponse;
