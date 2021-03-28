@@ -1,8 +1,8 @@
-### Developer Task 1 
+# Developer Task 1: Victor Chinyavada
+ 
+[chinyavadav@gmail.com](mailto:chinyavadav@gmail.com)
 
-* You will receive instructions from Cassava Smartech on what's required.
-
-## Issue 1: MobileNumberUtils LOGGER not static
+### Issue 1: MobileNumberUtils LOGGER not static
 
 MobileNumberUtils LOGGER not static hence it cannot be called from a static method
 
@@ -34,17 +34,17 @@ PreInsert annotation cannot be found in com.econetwireless.epay.domain.Subscribe
   location: class com.econetwireless.epay.domain.SubscriberRequest
 ```
 
-## Issue 4: Compilation failure: Compilation failure: wrong use of super && this keywords
+### Issue 4: Compilation failure: Compilation failure: wrong use of super && this keywords
 
 ```java
 this(super);
 ```
 
-## Issue 5: JPA persist & update methods not found
+### Issue 5: JPA persist & update methods not found
 
 SubscriberRequestDao extends JPA repository which in turn has no method persist or update defined
 
-## Issue 6: Error Executing JPARepository method findByPartnerCode
+### Issue 6: Error Executing JPARepository method findByPartnerCode
 
 Mismatching Entity name and reference in @NamedQuery 
  
@@ -54,7 +54,7 @@ Mismatching Entity name and reference in @NamedQuery
             org.hibernate.hql.internal.ast.QuerySyntaxException: Request is not mapped [select r from Request r where r.partnerCode = :partnerCode order by r.dateCreated desc ]
 ```
 
-## Issue 7: NullPointerException in com.econetwireless.epay.api.rest.resources.EpayResource
+### Issue 7: NullPointerException in com.econetwireless.epay.api.rest.resources.EpayResource
 
 TESTS failing because controller is throwing null pointer exception because controller parameter is declared as final and has no @PathVariable annotation
 
@@ -66,7 +66,7 @@ TESTS failing because controller is throwing null pointer exception because cont
   shouldReturnStatusOkIfRequestsAreMoreThanOne(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): Request processing failed; nested exception is java.lang.NullPointerException
 ```
 
-## Issue 8: private ResponseCode.getCode() returns null values
+### Issue 8: private ResponseCode.getCode() returns null values
 
 ResponseCode.getCode() returns null values because the enum field code is not assigned rather the parameter in constructor assigns to itself;
 
@@ -83,11 +83,11 @@ public enum ResponseCode {
 }
 ```
 
-## Issue 9: Controller without @Autowired service imports or constructor
+### Issue 9: Controller without @Autowired service imports or constructor
 
 EpayResource epayRequestProcessor && reportingProcessor interfaces are not autowired or instantiated via constructor
 
-## Issue 10: The server sent HTTP status code 415: Unsupported Media Type
+### Issue 10: The server sent HTTP status code 415: Unsupported Media Type
 
 Soap Service is getting different MediaType due to SOAP12HTTP_BINDING  in IntelligentNetworkBinding
 
@@ -100,11 +100,24 @@ Could not access remote service at [http://localhost:8888/intelligent-network-ap
 
 ```
 
-## Issue 11: partnerCode not found
+### Issue 11: partnerCode not found
 
 Missing @WebParam(name = "partnerCode") annotation on partnerCode parameter in IntelligentNetworkService
 
 Failed tests:   airtimeBalanceEnquiryShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): JSON path "$.responseCode" expected:<200> but was:<400>
+
+## Results
+
+```shell script
+mvn clean verify
+```
+
+![mvn clean verify](mvn_clean_verify.png "mvn clean verify result")
+
+```shell script
+mvn jetty:run
+```
+![mvn jetty:run](jetty.png "mvn jetty:run")
 
 
 
