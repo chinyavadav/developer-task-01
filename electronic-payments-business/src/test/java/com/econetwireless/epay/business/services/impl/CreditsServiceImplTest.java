@@ -53,21 +53,10 @@ public class CreditsServiceImplTest extends TestCase {
         airtimeTopupResponse.setMsisdn(airtimeTopupRequest.getMsisdn());
         airtimeTopupResponse.setBalance(inCreditResponse.getBalance());
 
-        assertEquals(airtimeTopupResponse.getMsisdn(), msisdn);
+        assertEquals(msisdn, airtimeTopupResponse.getMsisdn());
 
-        assertEquals(airtimeTopupResponse.getResponseCode(), "200");
-        assertEquals(airtimeTopupResponse.getBalance(), 1000d);
-    }
-
-    private static void changeSubscriberRequestStatusOnCredit(final SubscriberRequest subscriberRequest, final INCreditResponse inCreditResponse) {
-        final boolean isSuccessfulResponse = ResponseCode.SUCCESS.getCode().equalsIgnoreCase(inCreditResponse.getResponseCode());
-        if (!isSuccessfulResponse) {
-            subscriberRequest.setStatus(SystemConstants.STATUS_FAILED);
-        } else {
-            subscriberRequest.setStatus(SystemConstants.STATUS_SUCCESSFUL);
-            subscriberRequest.setBalanceAfter(inCreditResponse.getBalance());
-            subscriberRequest.setBalanceBefore(inCreditResponse.getBalance() - subscriberRequest.getAmount());
-        }
+        assertEquals("200", airtimeTopupResponse.getResponseCode());
+        assertEquals(1000d, airtimeTopupResponse.getBalance());
     }
 
     private static SubscriberRequest populateSubscriberRequest(final AirtimeTopupRequest airtimeTopupRequest) {
@@ -78,14 +67,5 @@ public class CreditsServiceImplTest extends TestCase {
         subscriberRequest.setReference(airtimeTopupRequest.getReferenceNumber());
         subscriberRequest.setAmount(airtimeTopupRequest.getAmount());
         return subscriberRequest;
-    }
-
-    private static INCreditRequest populate(final AirtimeTopupRequest airtimeTopupRequest) {
-        final INCreditRequest inCreditRequest = new INCreditRequest();
-        inCreditRequest.setAmount(airtimeTopupRequest.getAmount());
-        inCreditRequest.setMsisdn(airtimeTopupRequest.getMsisdn());
-        inCreditRequest.setPartnerCode(airtimeTopupRequest.getPartnerCode());
-        inCreditRequest.setReferenceNumber(airtimeTopupRequest.getReferenceNumber());
-        return inCreditRequest;
     }
 }
