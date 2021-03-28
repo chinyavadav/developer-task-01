@@ -25,13 +25,11 @@ public class ReportingProcessorImpl implements ReportingProcessor {
     @Override
     public TransactionsResponse getPartnerTransactions(final String partnerCode) {
         final TransactionsResponse transactionsResponse = new TransactionsResponse();
-        LOGGER.info("PANO");
         final List<SubscriberRequest> subscriberRequests = reportingService.findSubscriberRequestsByPartnerCode(partnerCode);
         transactionsResponse.setResponseCode(ResponseCode.SUCCESS.getCode());
         transactionsResponse.setNarrative("Successful search");
         transactionsResponse.setSubscriberRequests(subscriberRequests);
         transactionsResponse.setPartnerCode(partnerCode);
-        LOGGER.info(transactionsResponse.toString());
         return transactionsResponse;
     }
 }

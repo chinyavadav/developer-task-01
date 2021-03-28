@@ -87,10 +87,16 @@ public enum ResponseCode {
 
 EpayResource epayRequestProcessor && reportingProcessor interfaces are not autowired or instantiated via constructor
 
-## Issue 10: Failing to enquire Airtime Balance
+## Issue 10: The server sent HTTP status code 415: Unsupported Media Type
+
+Soap Service is getting different MediaType due to SOAP12HTTP_BINDING  in IntelligentNetworkBinding
+
+```java
+@BindingType(value = SOAPBinding.SOAP12HTTP_BINDING)
+```
 
 ```
-Failed tests:   airtimeBalanceEnquiryShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): JSON path "$.responseCode" expected:<200> but was:<400>
+Could not access remote service at [http://localhost:8888/intelligent-network-api/IntelligentNetworkService]; nested exception is com.sun.xml.internal.ws.client.ClientTransportException: The server sent HTTP status code 415: Unsupported Media Type
 
 ```
 
