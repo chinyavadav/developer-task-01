@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="econet-utils" />
         <module name="electronic-payments-business" />
-        <module name="electronic-payments-domain" />
+        <module name="electronic-payments-api" />
         <module name="electronic-payments-dao" />
         <module name="intelligent-network-api" />
-        <module name="econet-utils" />
-        <module name="electronic-payments-api" />
+        <module name="electronic-payments-domain" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
