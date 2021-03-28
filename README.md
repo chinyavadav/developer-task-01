@@ -66,7 +66,9 @@ TESTS failing because controller is throwing null pointer exception because cont
   shouldReturnStatusOkIfRequestsAreMoreThanOne(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): Request processing failed; nested exception is java.lang.NullPointerException
 ```
 
-## Issue 8: private ResponseCode enum constructor causing all statusCode to be null
+## Issue 8: private ResponseCode.getCode() returns null values
+
+ResponseCode.getCode() returns null values because the enum field code is not assigned rather the parameter in constructor assigns to itself;
 
 ```
 public enum ResponseCode {
@@ -81,7 +83,11 @@ public enum ResponseCode {
 }
 ```
 
-## Issue 9: Failing to enquire Airtime Balance
+## Issue 9: Controller without @Autowired service imports or constructor
+
+EpayResource epayRequestProcessor && reportingProcessor interfaces are not autowired or instantiated via constructor
+
+## Issue 10: Failing to enquire Airtime Balance
 
 ```
 Failed tests:   airtimeBalanceEnquiryShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp(com.econetwireless.epay.api.rest.resources.EpayResourcesIT): JSON path "$.responseCode" expected:<200> but was:<400>

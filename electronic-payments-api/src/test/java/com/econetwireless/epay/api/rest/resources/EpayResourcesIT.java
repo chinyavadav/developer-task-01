@@ -71,22 +71,22 @@ public class EpayResourcesIT {
                 andExpect(jsonPath("$.amount").value(is(greaterThan(0d))));
     }
 
-//    @Test
-//    @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "/testfiles/integration-test-load-partners.sql")
-//    @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "/testfiles/integration-test-cleanup-partners.sql")
-//    public void airtimeTopupShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp() throws Exception {
-//        final AirtimeTopupRequest airtimeTopupRequest = new AirtimeTopupRequest();
-//        airtimeTopupRequest.setAmount(2.73);
-//        airtimeTopupRequest.setMsisdn("773303584");
-//        airtimeTopupRequest.setPartnerCode(partnerCode);
-//        airtimeTopupRequest.setReferenceNumber("TOPUP-REF-0123");
-//        this.mockMvc.perform(post("/resources/services/credits").content(asJsonString(airtimeTopupRequest)).
-//                contentType(MediaType.parseMediaType("application/json;charset=UTF-8")).accept(MediaType.parseMediaType("application/json;charset=UTF-8"))).
-//                andExpect(status().isOk()).
-//                andExpect(content().contentType("application/json;charset=UTF-8")).
-//                andExpect(jsonPath("$.responseCode").value(ResponseCode.SUCCESS.getCode())).
-//                andExpect(jsonPath("$.balance").value(is(greaterThan(airtimeTopupRequest.getAmount()))));
-//    }
+    @Test
+    @Sql(executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD, scripts = "/testfiles/integration-test-load-partners.sql")
+    @Sql(executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD, scripts = "/testfiles/integration-test-cleanup-partners.sql")
+    public void airtimeTopupShouldReturnResponseCodeSUCCESSIfAllOtherSystemsAreUp() throws Exception {
+        final AirtimeTopupRequest airtimeTopupRequest = new AirtimeTopupRequest();
+        airtimeTopupRequest.setAmount(2.73);
+        airtimeTopupRequest.setMsisdn("773303584");
+        airtimeTopupRequest.setPartnerCode(partnerCode);
+        airtimeTopupRequest.setReferenceNumber("TOPUP-REF-0123");
+        this.mockMvc.perform(post("/resources/services/credits").content(asJsonString(airtimeTopupRequest)).
+                contentType(MediaType.parseMediaType("application/json;charset=UTF-8")).accept(MediaType.parseMediaType("application/json;charset=UTF-8"))).
+                andExpect(status().isOk()).
+                andExpect(content().contentType("application/json;charset=UTF-8")).
+                andExpect(jsonPath("$.responseCode").value(ResponseCode.SUCCESS.getCode())).
+                andExpect(jsonPath("$.balance").value(is(greaterThan(airtimeTopupRequest.getAmount()))));
+    }
 
     public static String asJsonString(final Object obj) {
         try {
